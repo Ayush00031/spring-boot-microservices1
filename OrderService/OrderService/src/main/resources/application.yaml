@@ -1,0 +1,57 @@
+server:
+  port: 8082
+  
+spring:
+  application:
+    name: ORDER-SERVICE  
+  datasource:
+    url: jdbc:mysql://localhost:3306/orderdb
+    username: root
+    password: 1234
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update   
+  config:
+    import: configserver:http://localhost:9296
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-42525761.okta.com/oauth2/default
+      client:
+        registration:
+          internal-client:
+            provider: okta
+            authorization-grant-type: client_credentials
+            scope: internal
+            client-id: 0oa8vy50d4EdlOw9o5d7
+            client-secret: DFiZa6K1H6Cz4pZ7ycim2ss8keddpc0EtVNjEWeD     
+        provider:
+          okta:
+            issuer-uri: https://dev-42525761.okta.com/oauth2/default
+        
+resilience4j:
+  circuitbreaker:
+    instances:
+      external:
+        event-consumer-buffer-size: 10
+        failure-rate-threshold:  50
+        minimum-number-of-calls: 5
+        auotmatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 5s
+        permitted-number-of-calls-in-half-open-state: 3
+        sliding-window-size: 10
+        sliding-window-type: COUNT_BASED
+          
+    
+#eureka:
+ # instance:
+  #  prefer-ip-address: true
+  #client:
+   # fetch-registry: true
+    #register-with-eureka: true
+    #service-url:
+     # defaultZone: http://localhost:8761/eureka
+   

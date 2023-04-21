@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 6 resources" deleteContents="false" description="Delete 6 resources" element1="/CloudGateway" element2="/ConfigServer" element3="/OrderService" element4="/PaymentService" element5="/ProductService" element6="/service-registry" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="6" stamp="1681369406748"/>
+</session>
